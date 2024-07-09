@@ -68,20 +68,30 @@ This project is a standalone Django application designed to transform unstructur
 ## Project Structure
 
 ```
-file_transformation/
+file_transform/
 │
 ├── manage.py
 ├── README.md
-├── requirements.txt
-├── app/
+├── file_transform
+│   ├── __pycache
+│   ├── __init__.py
+│   ├── setting.py
+│   ├── asgi.py
+│   ├── urls.py
+│   ├── wsgi.py
+├── transform
 │   ├── __init__.py
 │   ├── admin.py
 │   ├── apps.py
 │   ├── models.py
 │   ├── tests.py
 │   ├── views.py
+│   ├── input_df.py
+│   ├── managements
+│   │   └── load_master_excel.py
 │   ├── templates/
-│   │   └── index.html
+│   │   └── upload.html
+│   │   └── result.html
 │   ├── static/
 │   │   └── styles.css
 │   └── migrations/
