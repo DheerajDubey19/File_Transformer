@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Transformation Result</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div id="branding">
+                <h1>File Transformer</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li>File Transformer</li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div class="container">
+        <h1>Transformation Result</h1>
+        {% if error_message %}
+            <p class="error-message">{{ error_message }}</p>
+        {% else %}
+            <p>Transformation was successful. Download the file from the link below:</p>
+            <a href="/{{ path }}" download>Download Transformed File</a>
+            <h2>Generated Plot</h2>
+            <img src="data:image/png;base64,{{ plot }}" alt="Plot">
+        {% endif %}
+    </div>
+</body>
+</html>
