@@ -42,6 +42,7 @@ def upload_file(request):
 def transform(request, file_name):
     error_message = None
     path = ""
+    image_base64 = None
 
     file_path = os.path.join('media/upload', unquote(file_name))
     try:
@@ -54,10 +55,11 @@ def transform(request, file_name):
 
         if not os.path.exists(path):
             raise FileNotFoundError(f"Output file not found at path: {path}")
+        
 
         # Plot the graph from the output file
         output_df = pd.read_excel(path)
-        plt.figure(figsize=(9, 4))  # Increase the width for better label visibility
+        plt.figure(figsize=(9, 4))  
         output_df.groupby('Product')['Value'].sum().plot(kind='bar')
         plt.title('Total Value by Product')
         plt.xlabel('Product')

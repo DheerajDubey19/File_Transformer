@@ -20,6 +20,9 @@ def myFunc(file_path):
     Month = date_lst[0][:3]
     Year = int(date_lst[1])
 
+
+    print("***********first******************")
+
     # Renaming the column name into desired form and adding year and month column
     sheet1_df.columns = sheet1_df.iloc[0]
     sheet1_df = sheet1_df[1:].reset_index(drop=True)
@@ -52,9 +55,12 @@ def myFunc(file_path):
             'clubbed_name': category.clubbed_name,
             'category': category.category
         }
+        # print(insurer)
         return result
 
     dct_insurer = {}
+    
+    print("***********mid*****************")
 
     # Adding the clubbed_name and category from the database to the dataframe using a dictionary to avoid multiple database calls
     for index, row in sheet1_df.iterrows():
@@ -69,6 +75,8 @@ def myFunc(file_path):
             sheet1_df.at[index + 1, 'category'] = dct_insurer[insurer_name]['category']
         except:
             continue
+
+    # print(sheet1_df)
 
     for index, row in sheet2_df.iterrows():
         insurer_name = row['insurer']
@@ -100,8 +108,9 @@ def myFunc(file_path):
 
     #Creating the output dataframe in the desired form  
     output = pd.DataFrame(columns=['Year','Month','category','clubbed_name','Product','Value'])
-
+    print("***********last******************")
     for index,row in sheet1_df.iterrows():
+        # print(row)
         if row['insurer']=='Previous Year':
             for product in products:
                 if product in sheet1_df.columns:
@@ -144,11 +153,17 @@ def myFunc(file_path):
                     output = pd.concat([output, new_row], ignore_index=True)
 
     #sorting the output dataframe on the clubbed_name
+    print("**********mic check******************")
+
     output = output.sort_values(by='clubbed_name')
+
+    # print("**********mic check******************")
 
     output_dir = 'media/outputs/'
     os.makedirs(output_dir, exist_ok=True)
     output_file_path = os.path.join(output_dir, 'output.xlsx')
     output.to_excel(output_file_path, index=False)
+
+    print("*****************last output*******************")
 
     return output_file_path
