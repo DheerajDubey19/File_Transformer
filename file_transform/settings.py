@@ -91,7 +91,7 @@ WSGI_APPLICATION = 'file_transform.wsgi.application'
 #     }
 # }
 
-DATABASE = {
+DATABASES = {
 
     'default' : dj_database_url.parse(env('DATABASE_URL'))
 }
